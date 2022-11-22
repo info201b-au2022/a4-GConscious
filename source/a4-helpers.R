@@ -6,10 +6,11 @@ library(tidyverse)
 # Note: The CSV file is stored on my local machine to speed load times
 #---------------------------------------------------------------------------#
 get_data <- function(num_records=-1) {
-  fname <- "~/Documents/info201/data/incarceration_trends.csv"
+  fname <- "../data/incarceration_trends.csv"
   df <- read.csv(fname, nrows=num_records)
   return(df)
 }
+
 
 # Processing places ----
 # NOTE: For these functions to work, the dataframe `incarceration_df` must 
@@ -150,7 +151,8 @@ get_basic_info <- function(df) {
 # Comment or uncomment 
 #----------------------------------------------------------------------------#
 # ## Very important: You must initialize `incarceration_df`
-# incarceration_df <- get_data()
+incarceration_df <- get_data()
+
 # 
 # ## Demonstrate use of the functions
 # ## Each of these functions returns a vector of states
