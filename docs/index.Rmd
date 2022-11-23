@@ -1,5 +1,5 @@
 ---
-title: "Your A4 Report Title (TODO: Revise title)"
+title: "Visualizing Data of Incarcerated Individuals in the United States"
 author: "Amrith Gandham"
 date: '2022-11-01'
 output: html_document
@@ -11,35 +11,53 @@ source("../source/analysis.R")
 ```
 
 ## Abstract 
-[TODO: Include a short abstract (about 50 words)]
-
-# Test (TODO: Remove before submission!!)
-```{r echo=FALSE}
-q1_string <- test_query1()
-num <- 5
-```
-As you know, this is a markdown report. The [R Markdown Cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf) is **useful!**
-
-* Here's a test of a dynamic variable. Say **"`r q1_string`!!!** 
-* Here's another test. A vector
-of numbers: `r test_query2(num)`.
-
-Recall that _{r echo=TRUE}_ can be used to display the code, 
-which is very useful when developing and debugging a report. Here's an example: 
-
-```{r echo=TRUE}
-num <- 5
-sum <- sum(test_query2(num))
-print(sum)
-```
+The United States has the largest incarcerated population in the world. It is the main form of punishment when individuals are convicted of a crime at the local, state, or federal level. Many assume that the justice and legal system in the U.S. is a fair and trustworthy system. However, that is not the case in which this project will explore the injustice and inequalities people face across the country. 
 
 ## Introduction 
-[TODO]
+This data provided by the Vera Institute will help us explore various trends of incarceration at the most basic levels from counties, regions, and states. This report will primarily analyze data based on individuals' race and explore correlations and instances of inequalities that take place. But before we can dive into the analysis, we need to think about how this data can impact the people around us and the individuals who've been incarcerated. The direct stakeholders of this report can be the people who are incarcerated and their families. An indirect stakeholder could be judges , prosecutors, lawyers, and the government since they all have a part in of actually incarcerating a person. Some questions that we will answer and evaluate in this report are: _Which state has the highest rate of Black population incarcerated versus White population incarcerated?_ _Which county has the highest average Black jail population vs their White Population?_ _Which state has the highest average number of LatinX population incarcerated?_
 
-## Data Summary 
-[TODO]
 
-[TODO ... other sections ... See Canvas for details]
+## Data Summary
+A notable way to explore and find inequalities through data analysis is to come up a similar set of questions and compare them against each other. My first question was _Which state has the highest average number of LatinX population incarcerated as of 2018?_ The answer to that is California with an average number of **`r highest_avg_latinx_pop`** of LatinX individuals incarcerated. It's important to note here that data from the Census shows that about 35% of California's population is White with Hispanics/LatinX people make up about 40%. These are the 2 largest races in California yet, LatinX people are jailed at a disproportionate rate. The average number of White people jailed in California as of 2018 is **`r highest_avg_white_pop`**, a stark difference from the LatinX number. In addition, we can evaluate _Which state has the the highest average number of AAPI population incarcerated in 2018?_, which is **`r highest_avg_aapi_pop`** people, also in the state of California. This can tell us a lot about the processes and judicial systems present in California. Lastly there is the question of _Which state has the  highest RATE of Black population incarcerated in 2018?_ The answer to that is **`r highest_rate_black_pop`**%, in the state of Louisiana. This means that about 0.36% of the population in Louisiana are jailed Black individuals. In comparison to **`r highest_rate_white_pop`**% of the population in Louisiana which are incarcerated White individuals. We can notice there is an approximately 0.14% jump which may not seem like a lot but we are talking in the perspective of the state's population. 
 
-_All the very best with your work!_
+
+## Growth of the U.S. Prison Population
+
+```{r echo=FALSE}
+plot_jail_pop_for_us()
+```
+
+This chart displays the total jail population increase over time from the range of 1970 to 2018. 
+
+* We can notice in this chart that right before 1980 there was a steady population of jailed individuals but that soon took off right after 1980. This can probably be attributed to the War on Drugs as politicians the government made promises to public to eradicate the nation's drug problem at the time with consumption and drug trafficking. But even way after into the 2000s the jail population is still escalating at a rapid rate while only taking a a small dive around the 2008 period probably due to the financial crisis. Furthermore, there is a slight drop during the early 2010s where the total jailed population is hovering at around the same rate. 
+
+
+## Growth of Prison Population by State
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+plot_jail_pop_by_states(c("WA", "NY", "FL", "TX"))
+```
+
+This chart displays the increase of total jail population over time for the states of Florida, New York, Texas, and Washington. 
+
+* This chart reveals that Washington has, in general, a steady rate of their total jail population but it has increases slightly since the 1990s. However for the rest of the states there is a noticeable spike of the population of incarcerated individuals towards the late 1980s. Even then New York's jail population is showing an overall downward turn as it reaches the 2018 year. But what is more staggering is the jail populations of Texas and Florida have exploded within the past two decades. Florida did have a substantial drop off in the late 2000s and has remained fairly in the same area ever since. Texas on the other hand, has their jailed population increasing at a rapid and alarming rate. Compared to the states with the lower jailed populations of having almost a sixfold difference with the jail population of the higher states. I chose these groups of states because they all vary in their demographic and population makeups. It's better to visualize when there is a diverse set of data so you can yield great results. 
+
+## In-County Comparison 
+```{r echo=FALSE}
+plotted
+```
+
+This chart displays the jail population of Black and White persons in New York County, NY.
+
+* The question I brought up in order to generate this chart was What is the county with the highest average Black jail population? And in conjunction I also wanted to take a look at that same county's White jail population. I found that the county with the highest average Black jail population was New York County located in New York state. Then I went ahead and calculated the White incarcerated population for New York County and put these pieces together to generate this chart. It displays a very significant difference in how many more Black individuals are jailed than White individuals were by a long shot. It spurs new questions of how are Black individuals being jailed at such a staggering rate than White individuals in New York County. 
+
+# Map Representation of the Ratio of Black to White Individuals Incarcerated 
+```{r echo=FALSE}
+plot_ratio
+```
+
+This map displays the ratio of Black to White individuals incarcerated for each state. States that are marked in grey did not have sufficient data to display.
+
+* This map shows a geographical representation of the U.S. that is based on the ratio of Black to White individuals incarcerated in each state. I came up with the question of Which states have a higher Black to White incarcerated rate and thought this was the best way possible to represent that data. The ratio is calculated by getting the total population of Black individuals incarcerated divided by total White individuals incarcerated. As the ratio gets higher or, in this case the color gets lighter, it means the state has a higher number of Black individuals incarcerated versus White individuals. We can notice a pattern in the Southeastern and Northeastern states do indeed have higher ratios compared to other states across the country. Overall, states on the Western side of the country tend to have lower ratios of Black to White incarcerated persons. 
+
+
 
